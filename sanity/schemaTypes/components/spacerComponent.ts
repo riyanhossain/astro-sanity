@@ -12,31 +12,13 @@ export default defineType({
       description:
         'Default spacing height in pixels (applies to all screen sizes unless overridden)',
       validation: (Rule) => Rule.required().min(0).max(500),
-      initialValue: 40,
-    }),
-    defineField({
-      name: 'xsHeight',
-      title: 'Extra Small Screens (>=480px)',
-      type: 'number',
-      description: 'Height for mobile phones (in pixels)',
-    }),
-    defineField({
-      name: 'smHeight',
-      title: 'Small Screens (≥640px)',
-      type: 'number',
-      description: 'Height for small screens and up (in pixels)',
+      initialValue: 0,
     }),
     defineField({
       name: 'mdHeight',
       title: 'Medium Screens (≥768px)',
       type: 'number',
       description: 'Height for medium screens and up (in pixels)',
-    }),
-    defineField({
-      name: 'lgHeight',
-      title: 'Large Screens (≥1024px)',
-      type: 'number',
-      description: 'Height for large screens and up (in pixels)',
     }),
     defineField({
       name: 'xlHeight',

@@ -1,25 +1,36 @@
 ---
-import { componentRegistry } from "@/lib/component-registry";
+import {
+  componentRegistry,
+  type ComponentType,
+} from "@/lib/component-registry";
 
 const { data } = Astro.props;
 
-// Get the component from the registry based on the _type from Sanity
-const Component = componentRegistry[data._type];
+// Type assertion for data._type
+const componentType = data._type as ComponentType;
 
-// Determine if it's a Vue component by checking for render function
-// This is a simple heuristic that works for most cases
+// Get the component from the registry
+const DynamicComponent = componentRegistry[componentType];
+
+// Check if component exists
 const isVueComponent =
-  Component && typeof Component === "object" && "render" in Component;
+  DynamicComponent &&
+  typeof DynamicComponent === "object" &&
+  "render" in DynamicComponent;
+
+// Use a variable to hold the component that will be rendered
+let componentToRender;
 ---
 
-{
-  Component ? (
-    isVueComponent ? (
-      <Component client:load {...data} />
+{/* Use Fragment to avoid issues with TypeScript validating component names */}
+<Fragment>
+  {
+    DynamicComponent && isVueComponent ? (
+      <DynamicComponent client:load {...data} />
+    ) : DynamicComponent ? (
+      <DynamicComponent {...data} />
     ) : (
-      <Component {...data} />
+      <p>Unknown component type: {data._type}</p>
     )
-  ) : (
-    <p>Unknown component type: {data._type}</p>
-  )
-}
+  }
+</Fragment>
