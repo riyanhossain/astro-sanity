@@ -1,0 +1,25 @@
+---
+import { componentRegistry } from "@/lib/component-registry";
+
+const { data } = Astro.props;
+
+// Get the component from the registry based on the _type from Sanity
+const Component = componentRegistry[data._type];
+
+// Determine if it's a Vue component by checking for render function
+// This is a simple heuristic that works for most cases
+const isVueComponent =
+  Component && typeof Component === "object" && "render" in Component;
+---
+
+{
+  Component ? (
+    isVueComponent ? (
+      <Component client:load {...data} />
+    ) : (
+      <Component {...data} />
+    )
+  ) : (
+    <p>Unknown component type: {data._type}</p>
+  )
+}

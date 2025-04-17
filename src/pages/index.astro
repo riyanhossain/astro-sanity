@@ -1,11 +1,14 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/sanity";
+import SanityComponent from "@/components/SanityComponent.astro";
+import { getHomePageQuery } from "@/lib/queries";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const data = await client.fetch(getHomePageQuery);
+
+console.log(data);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+  {data[0]?.sections.map((section: any) => <SanityComponent data={section} />)}
 </Layout>

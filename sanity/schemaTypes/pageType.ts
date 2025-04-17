@@ -37,7 +37,12 @@ export const pageType = defineType({
       title: 'Page Sections',
       type: 'array',
       group: 'content',
-      of: [{type: 'heroSection'}, {type: 'textSection'}],
+      of: [
+        {type: 'heroSection'},
+        {type: 'textSection'},
+        {type: 'imageComponent'},
+        {type: 'spacer'},
+      ],
       validation: (rule) => rule.required().min(1),
       options: {
         insertMenu: {

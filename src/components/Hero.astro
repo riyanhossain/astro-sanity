@@ -1,0 +1,30 @@
+---
+import { getImageUrl } from "@/lib/helpers";
+
+let { image } = Astro.props;
+---
+
+<section class="w-full relative overflow-hidden">
+  {
+    image && getImageUrl(image, 1920) ? (
+      <img
+        src={getImageUrl(image, 1920)}
+        alt="Hero image"
+        class="w-full h-auto object-cover max-h-[600px] md:max-h-[700px]"
+        width={1920}
+        height={800}
+        loading="eager"
+      />
+    ) : (
+      <div class="w-full h-[50vh] bg-gradient-to-r from-blue-500 to-purple-500" />
+    )
+  }
+
+  <div
+    class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center"
+  >
+    <div class="container px-4 py-12 mx-auto text-center text-white">
+      <slot><!-- Optional content for hero overlay --></slot>
+    </div>
+  </div>
+</section>
