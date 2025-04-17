@@ -10,7 +10,7 @@ let { image } = Astro.props;
     src={getImageUrl(image, 1920) ?? ""}
     alt={image.alt || ""}
     class="w-full h-auto object-cover"
-    loading="lazy"
+    loading="eager"
     width={1920}
     height={800}
   />

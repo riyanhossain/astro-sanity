@@ -13,6 +13,7 @@ export default defineConfig({
     sanity({
       projectId: "6vcelkys",
       dataset: "production",
+      useCdn: false
     }),
     vue(),
   ],
