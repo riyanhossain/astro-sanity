@@ -11,6 +11,8 @@ import react from "@astrojs/react";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -32,5 +34,5 @@ export default defineConfig({
 
   output: "server",
 
-  adapter: cloudflare(),
+  adapter: vercel(),
 });
