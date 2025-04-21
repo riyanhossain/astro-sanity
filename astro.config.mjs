@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-
 import sanity from "@sanity/astro";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -14,15 +13,21 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [sanity({
-    projectId: "6vcelkys",
-    dataset: "production",
-    studioBasePath: "/studio",
-  }), vue(), react()],
+  integrations: [
+    sanity({
+      projectId: "6vcelkys",
+      dataset: "production",
+      studioBasePath: "/studio",
+    }),
+    vue(),
+    react(),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
   },
+
+  output: "server",
 
   adapter: cloudflare(),
 });
