@@ -27,7 +27,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
-
+    ssr: {
+      external: ["react-dom/server", "react-dom"],
+    },
   },
 
   output: "server",
