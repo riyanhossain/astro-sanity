@@ -14,3 +14,15 @@ declare module "*.astro" {
   const Component: AstroComponentFactory;
   export default Component;
 }
+
+type KVNamespace = import("@cloudflare/workers-types").KVNamespace;
+type ENV = {
+  // replace `MY_KV` with your KV namespace
+  SESSION: KVNamespace;
+};
+
+// use a default runtime configuration (advanced mode).
+type Runtime = import("@astrojs/cloudflare").Runtime<ENV>;
+declare namespace App {
+  interface Locals extends Runtime {}
+}
